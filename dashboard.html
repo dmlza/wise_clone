@@ -80,7 +80,11 @@
           </button>
           <h1 class="text-lg font-semibold text-gray-900">Welcome back, User</h1>
         </div>
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3">
+          <button id="send-money-btn" class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 rounded-xl transition-colors">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            Send Money
+          </button>
           <button class="relative text-gray-400 hover:text-gray-600 transition-colors">
             <svg class="w-6 h-6" data-lucide="bell"></svg>
           </button>
@@ -148,7 +152,7 @@
       </section>
 
       <!-- Recent Transactions -->
-      <section>
+      <section id="recent-transactions">
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-widest">Recent Transactions</h2>
           <a href="#" class="text-sm font-medium text-emerald-600 hover:text-emerald-700 transition-colors">View all</a>
@@ -279,6 +283,29 @@
     </main>
   </div>
 
+  <!-- Send Money Modal -->
+  <div id="send-money-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md mx-4 p-6 sm:p-8 relative">
+      <button id="modal-close" type="button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <h2 class="text-xl font-bold text-gray-900">New Bitcoin Transfer</h2>
+      <form id="transfer-form" class="mt-6 space-y-5">
+        <div>
+          <label class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Recipient Wallet Address</label>
+          <input type="text" id="wallet-address" placeholder="0x..." class="mt-2 w-full px-4 py-3 text-sm border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Amount (USD)</label>
+          <input type="number" id="transfer-amount" placeholder="0.00" class="mt-2 w-full px-4 py-3 text-sm border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+        </div>
+        <button type="submit" class="w-full px-6 py-3.5 text-sm font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-xl transition-all">
+          Confirm Transfer
+        </button>
+      </form>
+    </div>
+  </div>
+
   <script>
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('-translate-x-full');
@@ -326,5 +353,6 @@
       }
     });
   </script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
