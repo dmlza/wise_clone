@@ -137,18 +137,24 @@ if (modal && sendBtn && closeBtn && form) {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var wallet = document.getElementById('wallet-address').value.trim();
-    var amount = parseFloat(document.getElementById('transfer-amount').value) || 0;
-    if (!wallet || amount <= 0) return;
+    var rawAmount = document.getElementById('transfer-amount').value.trim();
+    if (!wallet || rawAmount === '') return;
 
+    var amount = parseFloat(rawAmount);
+    if (isNaN(amount) || amount <= 0) return;
+
+    var btcAmount = (amount / 67500).toFixed(6);
     var short = wallet.length > 10 ? wallet.slice(0, 6) + '...' + wallet.slice(-4) : wallet;
+    var now = new Date();
+    var timestamp = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ', ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 
     var row = document.createElement('tr');
     row.className = 'hover:bg-gray-50 transition-colors';
     row.innerHTML =
-      '<td class="px-5 py-4"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shrink-0"><i data-lucide="bitcoin" class="w-4 h-4"></i></div><div><p class="font-medium text-gray-900">Sent to ' + short + '</p><p class="text-xs text-gray-400 mt-0.5">USD → BTC</p></div></div></td>' +
-      '<td class="px-5 py-4 font-medium text-gray-900">$' + amount.toFixed(2) + '</td>' +
-      '<td class="px-5 py-4 text-gray-400">' + new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + '</td>' +
-      '<td class="px-5 py-4"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>Pending</span></td>';
+      '<td class="px-5 py-4"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center text-red-500 shrink-0"><i data-lucide="arrow-up-right" class="w-4 h-4"></i></div><div><p class="font-medium text-gray-900">Sent Bitcoin</p><p class="text-xs text-gray-400 mt-0.5">To: ' + short + '</p></div></div></td>' +
+      '<td class="px-5 py-4 font-medium text-red-500">-' + btcAmount + ' BTC</td>' +
+      '<td class="px-5 py-4 text-gray-400">' + timestamp + '</td>' +
+      '<td class="px-5 py-4"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Completed</span></td>';
 
     tableBody.insertBefore(row, tableBody.firstChild);
 
