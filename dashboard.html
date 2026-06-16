@@ -34,19 +34,19 @@
 
     <!-- Nav links -->
     <nav class="flex-1 px-4 pt-6 space-y-1">
-      <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg bg-emerald-500/10 text-emerald-400">
+      <a href="javascript:void(0)" data-tab="overview" onclick="switchTab('overview')" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg bg-emerald-500/10 text-emerald-400">
         <i data-lucide="home" class="w-5 h-5"></i>
         Home
       </a>
-      <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors">
+      <a href="javascript:void(0)" data-tab="cards" onclick="switchTab('cards')" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors">
         <i data-lucide="credit-card" class="w-5 h-5"></i>
         Cards
       </a>
-      <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors">
+      <a href="javascript:void(0)" data-tab="recipients" onclick="switchTab('recipients')" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors">
         <i data-lucide="users" class="w-5 h-5"></i>
         Recipients
       </a>
-      <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors">
+      <a href="javascript:void(0)" data-tab="manage" onclick="switchTab('manage')" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors">
         <i data-lucide="settings" class="w-5 h-5"></i>
         Manage
       </a>
@@ -96,6 +96,8 @@
     <!-- Page content -->
     <main class="p-4 sm:p-6 lg:p-8 space-y-8">
 
+      <!-- Overview Panel (default) -->
+      <div id="panel-overview">
       <!-- Balances -->
       <section id="balances">
         <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">Balances</h2>
@@ -280,6 +282,44 @@
         </div>
       </section>
 
+      </div>
+
+      <!-- Cards Panel -->
+      <section id="panel-cards" class="hidden">
+        <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">Cards</h2>
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-12 flex flex-col items-center justify-center text-center">
+          <div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 mb-4">
+            <i data-lucide="credit-card" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">No cards yet</h3>
+          <p class="text-sm text-gray-400 mt-1 max-w-xs">Link a debit or credit card to start sending money instantly.</p>
+        </div>
+      </section>
+
+      <!-- Recipients Panel -->
+      <section id="panel-recipients" class="hidden">
+        <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">Recipients</h2>
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-12 flex flex-col items-center justify-center text-center">
+          <div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 mb-4">
+            <i data-lucide="users" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">No saved recipients</h3>
+          <p class="text-sm text-gray-400 mt-1 max-w-xs">Add frequent contacts to send money faster.</p>
+        </div>
+      </section>
+
+      <!-- Manage Panel -->
+      <section id="panel-manage" class="hidden">
+        <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">Manage</h2>
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-12 flex flex-col items-center justify-center text-center">
+          <div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 mb-4">
+            <i data-lucide="settings" class="w-7 h-7"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900">Account settings</h3>
+          <p class="text-sm text-gray-400 mt-1 max-w-xs">Manage your profile, security, and notification preferences.</p>
+        </div>
+      </section>
+
     </main>
   </div>
 
@@ -310,6 +350,28 @@
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('-translate-x-full');
       document.getElementById('sidebar-overlay').classList.toggle('hidden');
+    }
+
+    var ACTIVE_TAB = 'overview';
+    var PANEL_IDS = ['overview', 'cards', 'recipients', 'manage'];
+
+    function switchTab(tab) {
+      if (tab === ACTIVE_TAB) return;
+      ACTIVE_TAB = tab;
+
+      PANEL_IDS.forEach(function (id) {
+        var panel = document.getElementById('panel-' + id);
+        if (panel) panel.classList.toggle('hidden', id !== tab);
+      });
+
+      document.querySelectorAll('#sidebar nav a[data-tab]').forEach(function (link) {
+        var isActive = link.dataset.tab === tab;
+        link.classList.toggle('bg-emerald-500/10', isActive);
+        link.classList.toggle('text-emerald-400', isActive);
+        link.classList.toggle('text-gray-400', !isActive);
+      });
+
+      if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
     }
 
     var pendingAmount = localStorage.getItem('lastSendAmount');
