@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -146,20 +148,274 @@
 
       </div>
     </section>
+
+    <!-- Parallax Showcase -->
+    <section id="parallax-showcase" class="bg-[#0b0e11]">
+      <div class="text-center pt-20 pb-12 px-4">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">How Wisecracker Moves Your Money</h2>
+        <p class="mt-4 text-gray-400 max-w-lg mx-auto">Three steps. Zero friction. Full transparency.</p>
+      </div>
+
+      <div class="relative">
+        <!-- Card 1 -->
+        <div class="parallax-card relative h-screen flex items-center overflow-hidden">
+          <div class="parallax-bg absolute inset-0 w-full h-[120%] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1600&q=80'); top: -10%;"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0b0e11]/90 via-[#0b0e11]/60 to-transparent"></div>
+          <div class="parallax-content relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-lg">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold mb-5">1</span>
+              <h3 class="text-3xl sm:text-4xl font-bold text-white">Lock Your Rate</h3>
+              <p class="mt-4 text-lg text-gray-300 leading-relaxed">Choose your fiat, pick your crypto, and freeze the exchange rate in one click. No slippage, no surprises — just a fixed price you can trust.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="parallax-card relative h-screen flex items-center overflow-hidden">
+          <div class="parallax-bg absolute inset-0 w-full h-[120%] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=1600&q=80'); top: -10%;"></div>
+          <div class="absolute inset-0 bg-gradient-to-l from-[#0b0e11]/90 via-[#0b0e11]/60 to-transparent"></div>
+          <div class="parallax-content relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-end">
+            <div class="max-w-lg text-right">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold mb-5">2</span>
+              <h3 class="text-3xl sm:text-4xl font-bold text-white">Instant Settlement</h3>
+              <p class="mt-4 text-lg text-gray-300 leading-relaxed">Funds move through our compliant rails in under 30 minutes. Your recipient gets notified the second the transaction clears — no more waiting days.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="parallax-card relative h-screen flex items-center overflow-hidden">
+          <div class="parallax-bg absolute inset-0 w-full h-[120%] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=1600&q=80'); top: -10%;"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0b0e11]/90 via-[#0b0e11]/60 to-transparent"></div>
+          <div class="parallax-content relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-lg">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold mb-5">3</span>
+              <h3 class="text-3xl sm:text-4xl font-bold text-white">Full Control</h3>
+              <p class="mt-4 text-lg text-gray-300 leading-relaxed">Self-custody your assets or withdraw to any wallet. Every transaction is recorded on-chain and visible from your dashboard — total transparency, total peace of mind.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Why overthink cross-border crypto?</h2>
+        <p class="mt-4 text-gray-400 max-w-xl mx-auto">Built for speed, priced for sanity, secured like a vault.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-[#1e2329] rounded-2xl border border-gray-800 p-8">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5">
+            <i data-lucide="zap" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white">Satoshi Speed</h3>
+          <p class="mt-2 text-sm text-gray-400 leading-relaxed">Transfers that settle faster than your coffee cools. No more watching a spinner for hours.</p>
+        </div>
+        <div class="bg-[#1e2329] rounded-2xl border border-gray-800 p-8">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5">
+            <i data-lucide="trending-down" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white">Wise Fees, Binance Power</h3>
+          <p class="mt-2 text-sm text-gray-400 leading-relaxed">No hidden markups, no exchange headaches. What you see is what they get — powered by institutional liquidity.</p>
+        </div>
+        <div class="bg-[#1e2329] rounded-2xl border border-gray-800 p-8">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5">
+            <i data-lucide="shield" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-white">Fort Knox Security</h3>
+          <p class="mt-2 text-sm text-gray-400 leading-relaxed">Your keys, your fiat, locked down tight. Military-grade encryption meets cold-storage peace of mind.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logo Cloud -->
+    <div class="bg-gray-900 py-24 sm:py-32">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <h2 class="text-center text-lg/8 font-semibold text-white">Trusted by the world's most innovative teams</h2>
+        <div class="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+          <img width="158" height="48" src="https://tailwindcss.com/plus-assets/img/logos/158x48/transistor-logo-white.svg" alt="Transistor" class="col-span-2 max-h-12 w-full object-contain lg:col-span-1" />
+          <img width="158" height="48" src="https://tailwindcss.com/plus-assets/img/logos/158x48/reform-logo-white.svg" alt="Reform" class="col-span-2 max-h-12 w-full object-contain lg:col-span-1" />
+          <img width="158" height="48" src="https://tailwindcss.com/plus-assets/img/logos/158x48/tuple-logo-white.svg" alt="Tuple" class="col-span-2 max-h-12 w-full object-contain lg:col-span-1" />
+          <img width="158" height="48" src="https://tailwindcss.com/plus-assets/img/logos/158x48/savvycal-logo-white.svg" alt="SavvyCal" class="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1" />
+          <img width="158" height="48" src="https://tailwindcss.com/plus-assets/img/logos/158x48/statamic-logo-white.svg" alt="Statamic" class="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1" />
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Accordion -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+      <div class="text-center mb-14">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Frequently Asked Questions</h2>
+        <p class="mt-4 text-gray-400">Everything you need to know about the bridge.</p>
+      </div>
+      <div class="space-y-4">
+        <details class="group bg-[#1e2329] rounded-2xl border border-gray-800 overflow-hidden">
+          <summary class="flex items-center gap-4 px-6 py-5 cursor-pointer list-none text-white font-medium hover:bg-[#2b3139] transition-colors">
+            <span class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold shrink-0">1</span>
+            <span class="flex-1">Will Wisecracker be available in the Philippines?</span>
+            <i data-lucide="plus" class="w-4 h-4 text-gray-500 shrink-0 group-open:hidden"></i>
+            <i data-lucide="minus" class="w-4 h-4 text-emerald-400 shrink-0 hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-gray-400 leading-relaxed border-t border-gray-800 pt-4">
+            Absolutely. The Philippines is one of our launch markets. You'll be able to send PHP in and out within minutes using our partner rails.
+          </div>
+        </details>
+        <details class="group bg-[#1e2329] rounded-2xl border border-gray-800 overflow-hidden">
+          <summary class="flex items-center gap-4 px-6 py-5 cursor-pointer list-none text-white font-medium hover:bg-[#2b3139] transition-colors">
+            <span class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold shrink-0">2</span>
+            <span class="flex-1">Who is BlockShoals Technologies?</span>
+            <i data-lucide="plus" class="w-4 h-4 text-gray-500 shrink-0 group-open:hidden"></i>
+            <i data-lucide="minus" class="w-4 h-4 text-emerald-400 shrink-0 hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-gray-400 leading-relaxed border-t border-gray-800 pt-4">
+            BlockShoals Technologies is the engineering team behind Wisecracker. We build compliant fiat-to-crypto infrastructure for global remittance corridors.
+          </div>
+        </details>
+        <details class="group bg-[#1e2329] rounded-2xl border border-gray-800 overflow-hidden">
+          <summary class="flex items-center gap-4 px-6 py-5 cursor-pointer list-none text-white font-medium hover:bg-[#2b3139] transition-colors">
+            <span class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold shrink-0">3</span>
+            <span class="flex-1">Why is Wisecracker the best bridge for crypto traders?</span>
+            <i data-lucide="plus" class="w-4 h-4 text-gray-500 shrink-0 group-open:hidden"></i>
+            <i data-lucide="minus" class="w-4 h-4 text-emerald-400 shrink-0 hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-gray-400 leading-relaxed border-t border-gray-800 pt-4">
+            We combine Wise-style transparent pricing with Binance-grade execution. No slippage, no hidden spreads, and settlement in under 30 minutes.
+          </div>
+        </details>
+        <details class="group bg-[#1e2329] rounded-2xl border border-gray-800 overflow-hidden">
+          <summary class="flex items-center gap-4 px-6 py-5 cursor-pointer list-none text-white font-medium hover:bg-[#2b3139] transition-colors">
+            <span class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold shrink-0">4</span>
+            <span class="flex-1">How to buy Bitcoin instantly on Wisecracker?</span>
+            <i data-lucide="plus" class="w-4 h-4 text-gray-500 shrink-0 group-open:hidden"></i>
+            <i data-lucide="minus" class="w-4 h-4 text-emerald-400 shrink-0 hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-gray-400 leading-relaxed border-t border-gray-800 pt-4">
+            Head to the dashboard, enter the USD amount you want to convert, and confirm. Your BTC lands in your wallet within minutes — no order book, no waiting.
+          </div>
+        </details>
+        <details class="group bg-[#1e2329] rounded-2xl border border-gray-800 overflow-hidden">
+          <summary class="flex items-center gap-4 px-6 py-5 cursor-pointer list-none text-white font-medium hover:bg-[#2b3139] transition-colors">
+            <span class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold shrink-0">5</span>
+            <span class="flex-1">How to track cryptocurrency prices in real-time?</span>
+            <i data-lucide="plus" class="w-4 h-4 text-gray-500 shrink-0 group-open:hidden"></i>
+            <i data-lucide="minus" class="w-4 h-4 text-emerald-400 shrink-0 hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-gray-400 leading-relaxed border-t border-gray-800 pt-4">
+            Our dashboard features a live BTC/USDT candlestick chart powered by real market data. Toggle floating rate mode on the converter to see prices move in real-time.
+          </div>
+        </details>
+        <details class="group bg-[#1e2329] rounded-2xl border border-gray-800 overflow-hidden">
+          <summary class="flex items-center gap-4 px-6 py-5 cursor-pointer list-none text-white font-medium hover:bg-[#2b3139] transition-colors">
+            <span class="flex items-center justify-center w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold shrink-0">6</span>
+            <span class="flex-1">How to trade fiat to crypto cleanly?</span>
+            <i data-lucide="plus" class="w-4 h-4 text-gray-500 shrink-0 group-open:hidden"></i>
+            <i data-lucide="minus" class="w-4 h-4 text-emerald-400 shrink-0 hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-5 text-sm text-gray-400 leading-relaxed border-t border-gray-800 pt-4">
+            Select your fiat currency, enter the amount, choose BTC or any supported crypto, and hit send. We handle the conversion, compliance, and settlement.
+          </div>
+        </details>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="border-t border-gray-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-sm text-gray-500">
-      <p>&copy; 2026. All rights reserved.</p>
-      <div class="flex items-center gap-6">
-        <a href="#" class="hover:text-gray-300 transition-colors">Privacy</a>
-        <a href="#" class="hover:text-gray-300 transition-colors">Terms</a>
-        <a href="#" class="hover:text-gray-300 transition-colors">Cookies</a>
+  <!-- Footer -->
+  <footer class="border-t border-gray-800 bg-[#0b0e11]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div>
+          <h4 class="text-sm font-semibold text-white mb-4">Product</h4>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Converter</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Dashboard</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Cards</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Recipients</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white mb-4">Company</h4>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-gray-200 transition-colors">About</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Blog</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Careers</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white mb-4">Legal</h4>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Privacy</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Terms</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Cookies</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Licenses</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold text-white mb-4">Support</h4>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Help Center</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Status</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">API Docs</a></li>
+            <li><a href="#" class="hover:text-gray-200 transition-colors">Community</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-10 pt-6 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+        <p>&copy; 2026 Wisecracker — BlockShoals Technologies. All rights reserved.</p>
+        <div class="flex items-center gap-5">
+          <a href="#" class="hover:text-gray-300 transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+          <a href="#" class="hover:text-gray-300 transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+          <a href="#" class="hover:text-gray-300 transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+        </div>
       </div>
     </div>
   </footer>
 
+  <!-- Floating Support Widget -->
+  <div class="fixed bottom-6 right-6 z-50 cursor-pointer group">
+    <div class="w-14 h-14 rounded-full bg-[#fcd535] shadow-lg shadow-[#fcd535]/30 flex items-center justify-center text-black hover:scale-105 transition-transform">
+      <i data-lucide="headphones" class="w-6 h-6"></i>
+    </div>
+  </div>
+
   <script src="assets/js/app.js"></script>
   <script>lucide.createIcons();</script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    var cards = document.querySelectorAll('.parallax-card');
+    cards.forEach(function (card) {
+      var bg = card.querySelector('.parallax-bg');
+      var content = card.querySelector('.parallax-content');
+
+      gsap.to(bg, {
+        y: '10%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+
+      gsap.fromTo(content, {
+        y: 60,
+        opacity: 0
+      }, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 80%',
+          end: 'top 30%',
+          scrub: true
+        }
+      });
+    });
+  </script>
 </body>
 </html>
