@@ -116,6 +116,54 @@ if (sendInput) {
 
   sendInput.addEventListener('input', calculate);
   calculate();
+
+  // ---- Floating Rate Mode ----
+  var lockedBtn = document.getElementById('rate-mode-locked');
+  var floatingBtn = document.getElementById('rate-mode-floating');
+  var isFloating = false;
+  var baseReceiveValue = 0;
+  var floatingInterval = null;
+
+  function applyFluctuation() {
+    if (!isFloating) return;
+    var factor = 1 + (Math.random() - 0.5) * 0.0004;
+    var fluctuated = baseReceiveValue * factor;
+    receiveInput.value = receiveCurrency === 'BTC' ? fmtBtc(fluctuated) : fmtMoney(fluctuated, receiveCurrency);
+  }
+
+  function setRateMode(mode) {
+    if (mode === 'floating' && !isFloating) {
+      isFloating = true;
+      lockedBtn.classList.remove('bg-emerald-500/20', 'text-emerald-400');
+      lockedBtn.classList.add('text-gray-400');
+      floatingBtn.classList.add('bg-emerald-500/20', 'text-emerald-400');
+      floatingBtn.classList.remove('text-gray-400');
+      baseReceiveValue = parseFloat(receiveInput.value.replace(/[^0-9.]/g, '')) || 0;
+      floatingInterval = setInterval(applyFluctuation, 3000);
+    } else if (mode === 'locked' && isFloating) {
+      isFloating = false;
+      clearInterval(floatingInterval);
+      floatingInterval = null;
+      floatingBtn.classList.remove('bg-emerald-500/20', 'text-emerald-400');
+      floatingBtn.classList.add('text-gray-400');
+      lockedBtn.classList.add('bg-emerald-500/20', 'text-emerald-400');
+      lockedBtn.classList.remove('text-gray-400');
+      calculate();
+    }
+  }
+
+  if (lockedBtn && floatingBtn) {
+    lockedBtn.addEventListener('click', function () { setRateMode('locked'); });
+    floatingBtn.addEventListener('click', function () { setRateMode('floating'); });
+  }
+
+  var origCalculate = calculate;
+  calculate = function () {
+    origCalculate();
+    if (isFloating) {
+      baseReceiveValue = parseFloat(receiveInput.value.replace(/[^0-9.]/g, '')) || 0;
+    }
+  };
 }
 
 // ---- Send Money Modal (dashboard.html) ----

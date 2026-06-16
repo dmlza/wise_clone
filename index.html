@@ -3,34 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="" />
-  <title></title>
+  <meta name="description" content="Wisecracker — Crypto-Fiat Bridge" />
+  <title>Wisecracker — Crypto-Fiat Bridge</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col bg-white text-gray-900">
+<body class="min-h-screen flex flex-col bg-[#0b0e11] text-gray-100">
 
-  <header class="border-b border-gray-100">
+  <header class="border-b border-gray-800">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <a href="index.html" class="text-xl font-extrabold tracking-tight text-emerald-500">Wisecracker</a>
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
-        <a href="#" class="hover:text-gray-900 transition-colors">Features</a>
-        <a href="#" class="hover:text-gray-900 transition-colors">Pricing</a>
-        <a href="#" class="hover:text-gray-900 transition-colors">About</a>
-        <a href="#" class="hover:text-gray-900 transition-colors">Contact</a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+        <a href="#" class="hover:text-gray-200 transition-colors">Features</a>
+        <a href="#" class="hover:text-gray-200 transition-colors">Pricing</a>
+        <a href="#" class="hover:text-gray-200 transition-colors">About</a>
+        <a href="#" class="hover:text-gray-200 transition-colors">Contact</a>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="dashboard.html" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">Sign in</a>
-        <a href="#" class="text-sm font-semibold text-white bg-gray-900 hover:bg-gray-800 px-5 py-2.5 rounded-full transition-colors">Get started</a>
+      <div class="flex items-center gap-6">
+        <a href="dashboard.html" class="text-sm font-medium text-gray-400 hover:text-gray-200 transition-colors">Sign in</a>
+        <a href="#" class="text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 px-5 py-2.5 rounded-full transition-colors">Get started</a>
       </div>
     </nav>
   </header>
@@ -41,14 +40,14 @@
 
         <!-- Left: Hero Text -->
         <div>
-          <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900 leading-[1.1]">
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.1]">
             Money for here, there, and everywhere
           </h1>
-          <p class="mt-6 text-lg sm:text-xl text-gray-500 leading-relaxed max-w-xl">
+          <p class="mt-6 text-lg sm:text-xl text-gray-400 leading-relaxed max-w-xl">
             Send money across borders with real exchange rates — no hidden fees, no markup, no surprises.
           </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors">
+          <div class="mt-8 flex flex-wrap gap-6">
+            <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors">
               Learn how it works
               <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </a>
@@ -57,78 +56,89 @@
 
         <!-- Right: Currency Converter Card -->
         <div class="w-full max-w-md mx-auto lg:mx-0 lg:ml-auto">
-          <div class="bg-white rounded-3xl shadow-xl shadow-gray-200/70 border border-gray-100 p-6 sm:p-8">
+          <div class="bg-[#1e2329] rounded-3xl border border-gray-800 p-6 sm:p-8">
+
+            <!-- Rate Mode Switcher -->
+            <div class="flex items-center gap-1 bg-[#2b3139] rounded-lg p-1 mb-6">
+              <button id="rate-mode-locked" class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-md bg-emerald-500/20 text-emerald-400 transition-all">
+                <span>🔒</span> Lock Fixed Rate
+              </button>
+              <button id="rate-mode-floating" class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-md text-gray-400 hover:text-gray-200 transition-all">
+                <span>📈</span> Floating Market Rate
+              </button>
+            </div>
+
             <!-- You Send -->
             <div>
-              <label class="text-xs font-semibold text-gray-400 uppercase tracking-widest">You send</label>
-              <div class="mt-2 flex items-stretch border border-gray-200 rounded-xl focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500 transition-all">
-                <input id="send-amount" type="number" value="1000" class="w-full px-4 py-3.5 text-lg font-semibold text-gray-900 outline-none bg-transparent rounded-l-xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+              <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">You send</label>
+              <div class="mt-2 flex items-stretch border border-gray-700 rounded-xl focus-within:ring-2 focus-within:ring-emerald-500/20 focus-within:border-emerald-500 transition-all">
+                <input id="send-amount" type="number" value="1000" class="w-full px-4 py-3.5 text-lg font-semibold text-white outline-none bg-transparent rounded-l-xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
                 <div class="relative">
-                  <button id="send-currency-btn" type="button" class="flex items-center gap-2 px-4 h-full border-l border-gray-200 bg-gray-50 min-w-[100px] cursor-pointer rounded-r-xl transition-colors hover:bg-gray-100">
-                    <span id="send-currency-label" class="text-base font-semibold text-gray-900">USD</span>
-                    <i data-lucide="chevron-down" class="w-3 h-3 text-gray-400"></i>
+                  <button id="send-currency-btn" type="button" class="flex items-center gap-2 px-4 h-full border-l border-gray-700 bg-[#2b3139] min-w-[100px] cursor-pointer rounded-r-xl transition-colors hover:bg-[#363e47]">
+                    <span id="send-currency-label" class="text-base font-semibold text-white">USD</span>
+                    <i data-lucide="chevron-down" class="w-3 h-3 text-gray-500"></i>
                   </button>
-                  <div id="send-currency-dropdown" class="hidden absolute right-0 top-full mt-1 w-32 bg-white border border-gray-200 rounded-xl shadow-lg z-20 overflow-hidden">
-                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 text-left transition-colors" data-value="USD">USD</button>
-                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 text-left transition-colors" data-value="EUR">EUR</button>
-                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 text-left transition-colors" data-value="GBP">GBP</button>
-                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 text-left transition-colors" data-value="BTC">₿ BTC</button>
+                  <div id="send-currency-dropdown" class="hidden absolute right-0 top-full mt-1 w-32 bg-[#1e2329] border border-gray-700 rounded-xl shadow-lg z-20 overflow-hidden">
+                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-[#2b3139] text-left transition-colors" data-value="USD">USD</button>
+                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-[#2b3139] text-left transition-colors" data-value="EUR">EUR</button>
+                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-[#2b3139] text-left transition-colors" data-value="GBP">GBP</button>
+                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-[#2b3139] text-left transition-colors" data-value="BTC">₿ BTC</button>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Fee Breakdown -->
-            <div class="mt-6 space-y-3">
+            <div class="mt-6 space-y-4">
               <div class="flex items-center justify-between text-sm">
                 <div class="flex items-center gap-2">
-                  <span class="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-bold">1</span>
-                  <span class="text-gray-500">Local fee</span>
+                  <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#2b3139] text-gray-400 text-[10px] font-bold">1</span>
+                  <span class="text-gray-400">Local fee</span>
                 </div>
-                <span id="local-fee" class="font-medium text-gray-900">$3.50</span>
+                <span id="local-fee" class="font-medium text-gray-200">$3.50</span>
               </div>
               <div class="flex items-center justify-between text-sm">
                 <div class="flex items-center gap-2">
-                  <span class="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-bold">2</span>
-                  <span class="text-gray-500">Exchange rate</span>
+                  <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#2b3139] text-gray-400 text-[10px] font-bold">2</span>
+                  <span class="text-gray-400">Exchange rate</span>
                 </div>
-                <span id="rate-display" class="font-medium text-gray-900">1 USD = 0.00001481 BTC</span>
+                <span id="rate-display" class="font-medium text-gray-200">1 USD = 0.00001481 BTC</span>
               </div>
               <div class="flex items-center justify-between text-sm">
                 <div class="flex items-center gap-2">
-                  <span class="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-bold">3</span>
-                  <span class="text-gray-500">Transfer fee</span>
+                  <span class="flex items-center justify-center w-5 h-5 rounded-full bg-[#2b3139] text-gray-400 text-[10px] font-bold">3</span>
+                  <span class="text-gray-400">Transfer fee</span>
                 </div>
-                <span id="transfer-fee" class="font-medium text-gray-900">$0.00</span>
+                <span id="transfer-fee" class="font-medium text-gray-200">$0.00</span>
               </div>
-              <div class="border-t border-gray-100 pt-3 flex items-center justify-between text-sm font-semibold">
-                <span class="text-gray-500">Total fees</span>
-                <span id="total-fees" class="text-gray-900">$3.50</span>
+              <div class="border-t border-gray-800 pt-3 flex items-center justify-between text-sm font-semibold">
+                <span class="text-gray-400">Total fees</span>
+                <span id="total-fees" class="text-gray-200">$3.50</span>
               </div>
             </div>
 
             <!-- Recipient Gets -->
             <div class="mt-6">
-              <label class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Recipient gets</label>
-              <div class="mt-2 flex items-stretch border border-gray-200 rounded-xl bg-gray-50">
-                <input id="receive-amount" type="text" value="0.014689" readonly class="w-full px-4 py-3.5 text-lg font-semibold text-gray-900 outline-none bg-transparent rounded-l-xl cursor-default" />
+              <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">Recipient gets</label>
+              <div class="mt-2 flex items-stretch border border-gray-700 rounded-xl bg-[#2b3139]">
+                <input id="receive-amount" type="text" value="0.014689" readonly class="w-full px-4 py-3.5 text-lg font-semibold text-white outline-none bg-transparent rounded-l-xl cursor-default" />
                 <div class="relative">
-                  <button id="receive-currency-btn" type="button" class="flex items-center gap-2 px-4 h-full border-l border-gray-200 bg-gray-50 min-w-[100px] cursor-pointer rounded-r-xl transition-colors hover:bg-gray-100">
-                    <span id="receive-currency-label" class="text-base font-semibold text-gray-900">₿ BTC</span>
-                    <i data-lucide="chevron-down" class="w-3 h-3 text-gray-400"></i>
+                  <button id="receive-currency-btn" type="button" class="flex items-center gap-2 px-4 h-full border-l border-gray-700 bg-[#2b3139] min-w-[100px] cursor-pointer rounded-r-xl transition-colors hover:bg-[#363e47]">
+                    <span id="receive-currency-label" class="text-base font-semibold text-white">₿ BTC</span>
+                    <i data-lucide="chevron-down" class="w-3 h-3 text-gray-500"></i>
                   </button>
-                  <div id="receive-currency-dropdown" class="hidden absolute right-0 top-full mt-1 w-32 bg-white border border-gray-200 rounded-xl shadow-lg z-20 overflow-hidden">
-                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 text-left transition-colors" data-value="USD">USD</button>
-                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 text-left transition-colors" data-value="EUR">EUR</button>
-                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 text-left transition-colors" data-value="GBP">GBP</button>
-                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 text-left transition-colors" data-value="BTC">₿ BTC</button>
+                  <div id="receive-currency-dropdown" class="hidden absolute right-0 top-full mt-1 w-32 bg-[#1e2329] border border-gray-700 rounded-xl shadow-lg z-20 overflow-hidden">
+                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-[#2b3139] text-left transition-colors" data-value="USD">USD</button>
+                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-[#2b3139] text-left transition-colors" data-value="EUR">EUR</button>
+                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-[#2b3139] text-left transition-colors" data-value="GBP">GBP</button>
+                    <button type="button" class="w-full px-4 py-2.5 text-sm font-medium text-gray-300 hover:bg-[#2b3139] text-left transition-colors" data-value="BTC">₿ BTC</button>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- CTA -->
-            <a href="dashboard.html" class="mt-6 flex items-center justify-center w-full px-6 py-3.5 text-sm font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-xl transition-all">
+            <a href="dashboard.html" class="mt-6 flex items-center justify-center w-full px-6 py-3.5 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-500 rounded-xl transition-all">
               Get Started
             </a>
           </div>
@@ -138,13 +148,13 @@
     </section>
   </main>
 
-  <footer class="border-t border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+  <footer class="border-t border-gray-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-sm text-gray-500">
       <p>&copy; 2026. All rights reserved.</p>
       <div class="flex items-center gap-6">
-        <a href="#" class="hover:text-gray-600 transition-colors">Privacy</a>
-        <a href="#" class="hover:text-gray-600 transition-colors">Terms</a>
-        <a href="#" class="hover:text-gray-600 transition-colors">Cookies</a>
+        <a href="#" class="hover:text-gray-300 transition-colors">Privacy</a>
+        <a href="#" class="hover:text-gray-300 transition-colors">Terms</a>
+        <a href="#" class="hover:text-gray-300 transition-colors">Cookies</a>
       </div>
     </div>
   </footer>
