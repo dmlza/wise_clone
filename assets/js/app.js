@@ -6,10 +6,14 @@ const totalFeesEl = document.getElementById('total-fees');
 
 const FLAT_FEE = 4.50;
 const VARIABLE_RATE = 0.004;
-const EXCHANGE_RATE = 0.92;
+const EXCHANGE_RATE = 67500;
 
 function formatCurrency(amount) {
   return '$' + amount.toFixed(2);
+}
+
+function formatBtc(amount) {
+  return amount.toFixed(6);
 }
 
 function calculate() {
@@ -18,9 +22,9 @@ function calculate() {
   const variableFee = gross * VARIABLE_RATE;
   const totalFee = FLAT_FEE + variableFee;
   const net = gross - totalFee;
-  const converted = net * EXCHANGE_RATE;
+  const btc = net / EXCHANGE_RATE;
 
-  receiveInput.value = converted.toFixed(2);
+  receiveInput.value = formatBtc(btc);
 
   localFeeEl.textContent = formatCurrency(FLAT_FEE);
   transferFeeEl.textContent = formatCurrency(variableFee);
