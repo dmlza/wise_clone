@@ -87,7 +87,7 @@
     <main class="p-4 sm:p-6 lg:p-8 space-y-8">
 
       <!-- Balances -->
-      <section>
+      <section id="balances">
         <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">Balances</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="bg-white rounded-2xl border border-orange-200/80 p-5 flex items-center justify-between shadow-sm shadow-orange-200/30">
@@ -266,6 +266,18 @@
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('-translate-x-full');
       document.getElementById('sidebar-overlay').classList.toggle('hidden');
+    }
+
+    var pendingAmount = localStorage.getItem('lastSendAmount');
+    if (pendingAmount && parseFloat(pendingAmount) > 0) {
+      var banner = document.createElement('div');
+      banner.className = 'flex items-center gap-3 px-5 py-4 bg-amber-50 border border-amber-200 rounded-2xl text-sm text-amber-800';
+      banner.innerHTML = '<span class="text-lg">🔄</span> <span>Pending Transaction: Processing your transfer of <strong>$' + parseFloat(pendingAmount).toFixed(2) + ' USD</strong> to Bitcoin.</span>';
+
+      var balancesHeading = document.querySelector('#balances h2');
+      if (balancesHeading) {
+        balancesHeading.parentNode.insertBefore(banner, balancesHeading.nextSibling);
+      }
     }
   </script>
 </body>
