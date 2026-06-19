@@ -213,3 +213,102 @@ if (modal && sendBtn && closeBtn && form) {
     document.getElementById('transfer-amount').value = '';
   });
 }
+
+// ---- Sign In Modal ----
+(function () {
+  var link = document.getElementById('signin-link');
+  var modal = document.getElementById('signin-modal');
+  var close = document.getElementById('signin-modal-close');
+  var form = document.getElementById('signin-form');
+
+  if (!link || !modal) return;
+
+  function openModal(e) {
+    e.preventDefault();
+    modal.classList.remove('hidden');
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+  }
+
+  link.addEventListener('click', openModal);
+
+  if (close) {
+    close.addEventListener('click', closeModal);
+  }
+
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) closeModal();
+  });
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      window.location.href = 'dashboard.html';
+    });
+  }
+})();
+
+// ---- Chat Widget ----
+(function () {
+  var chatWidget = document.getElementById('chat-widget');
+  var chatPopup = document.getElementById('chat-popup');
+  var chatClose = document.getElementById('chat-close');
+  var chatInput = document.getElementById('chat-input');
+  var chatSend = document.getElementById('chat-send');
+  var chatMessages = document.getElementById('chat-messages');
+
+  if (!chatWidget || !chatPopup) return;
+
+  function toggleChat(e) {
+    e.stopPropagation();
+    chatPopup.classList.toggle('hidden');
+    if (!chatPopup.classList.contains('hidden') && chatInput) {
+      chatInput.focus();
+    }
+  }
+
+  chatWidget.addEventListener('click', toggleChat);
+
+  if (chatClose) {
+    chatClose.addEventListener('click', function (e) {
+      e.stopPropagation();
+      chatPopup.classList.add('hidden');
+    });
+  }
+
+  function addMessage(text, isUser) {
+    var div = document.createElement('div');
+    if (isUser) {
+      div.className = 'flex justify-end';
+      div.innerHTML = '<div class="bg-emerald-600 rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-[80%]"><p class="text-sm text-white">' + text + '</p></div>';
+    } else {
+      div.className = 'flex items-start gap-3';
+      div.innerHTML = '<div class="w-7 h-7 rounded-full bg-[#fcd535] flex items-center justify-center shrink-0"><i data-lucide="headphones" class="w-3.5 h-3.5 text-black"></i></div><div class="bg-[#2b3139] rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-[80%]"><p class="text-sm text-gray-200">' + text + '</p></div>';
+    }
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+  }
+
+  function sendMessage() {
+    var text = chatInput.value.trim();
+    if (!text) return;
+    addMessage(text, true);
+    chatInput.value = '';
+    setTimeout(function () {
+      addMessage('Thanks for reaching out! Our team will get back to you shortly. In the meantime, check our FAQ or dashboard for instant answers.');
+    }, 1000);
+  }
+
+  if (chatSend) {
+    chatSend.addEventListener('click', sendMessage);
+  }
+
+  if (chatInput) {
+    chatInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') sendMessage();
+    });
+  }
+})();
