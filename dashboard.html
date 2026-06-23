@@ -286,8 +286,151 @@
 
       <!-- Cards Panel -->
       <section id="panel-cards" class="hidden">
-        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-4">Cards</h2>
-        <div class="bg-[#1e2329] rounded-2xl border border-gray-800 p-12 flex flex-col items-center justify-center text-center">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-widest">Cards &amp; Accounts</h2>
+          <div class="flex items-center gap-3">
+            <button onclick="generateVirtualCard()" class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-xl transition-colors">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              Virtual Card
+            </button>
+            <button onclick="openAddCardModal()" class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-500 rounded-xl transition-colors">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              Add Card
+            </button>
+          </div>
+        </div>
+
+        <div id="cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Card 1 (Default) -->
+          <div id="card-1" class="relative group">
+            <div id="card-face-1" class="relative bg-gradient-to-br from-violet-600 to-indigo-950 rounded-2xl p-6 text-white shadow-lg border border-violet-400/10 transition-all duration-300">
+              <div id="frozen-overlay-1" class="hidden absolute inset-0 rounded-2xl bg-black/50 backdrop-grayscale z-10 flex items-center justify-center">
+                <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-red-500/80 text-white rounded-full">Frozen</span>
+              </div>
+              <div class="flex items-center justify-between mb-8 relative z-[5]">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-6 rounded bg-yellow-300/30 flex items-center justify-center text-[10px] font-bold text-yellow-200">IC</div>
+                  <span class="text-[10px] font-semibold uppercase tracking-widest opacity-60">Virtual</span>
+                  <span id="frozen-badge-1" class="hidden text-[10px] font-semibold text-red-400 bg-red-500/20 px-1.5 py-0.5 rounded">Frozen</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <div class="relative">
+                    <button onclick="toggleCardMenu(1)" class="text-white/40 hover:text-white transition-colors p-1" title="Card actions">
+                      <i data-lucide="more-vertical" class="w-4 h-4"></i>
+                    </button>
+                    <div id="card-menu-1" class="hidden absolute right-0 top-8 w-52 bg-[#2b3139] border border-gray-700 rounded-xl shadow-xl z-30 py-1">
+                      <button onclick="setDefaultCard(1)" class="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="star" class="w-4 h-4 text-gray-500 shrink-0"></i> Set as default
+                      </button>
+                      <button onclick="toggleFreeze(1)" id="freeze-btn-1" class="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="snowflake" class="w-4 h-4 text-blue-400 shrink-0"></i> Freeze card
+                      </button>
+                      <button onclick="toggleFunding(1)" id="funding-btn-1" class="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="repeat" class="w-4 h-4 text-emerald-400 shrink-0"></i> <span id="funding-text-1">Remove funding source</span>
+                      </button>
+                      <button onclick="openCurrencyModal(1)" class="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="globe" class="w-4 h-4 text-sky-400 shrink-0"></i> Change currency
+                      </button>
+                      <button onclick="openLimitModal(1)" class="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="sliders" class="w-4 h-4 text-purple-400 shrink-0"></i> Spend limit
+                      </button>
+                      <hr class="border-gray-700 my-1">
+                      <button onclick="removeCard(1)" class="w-full text-left px-4 py-2.5 text-sm text-red-400 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="trash-2" class="w-4 h-4 text-red-400 shrink-0"></i> Remove card
+                      </button>
+                    </div>
+                  </div>
+                  <span class="text-lg font-bold tracking-wider" style="font-family: serif;">VISA</span>
+                </div>
+              </div>
+              <p class="text-lg font-mono tracking-widest mb-5 relative z-[5]">•••• &nbsp;•••• &nbsp;•••• &nbsp;4532</p>
+              <div class="flex items-center justify-between text-sm mb-4 relative z-[5]">
+                <div>
+                  <p class="text-[10px] opacity-60 uppercase tracking-wider">Cardholder</p>
+                  <p class="font-medium tracking-wide">User</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-[10px] opacity-60 uppercase tracking-wider">Expires</p>
+                  <p class="font-medium">08/28</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 pt-3 border-t border-white/10 relative z-[5]">
+                <span id="funding-badge-1" class="text-[10px] font-semibold text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded">Funding</span>
+                <span id="currency-badge-1" class="text-[10px] font-semibold text-gray-400 bg-white/5 px-2 py-0.5 rounded">USD</span>
+                <span id="limit-badge-1" class="text-[10px] text-gray-500">Limit: $5,000</span>
+              </div>
+            </div>
+            <div id="default-badge-1" class="absolute -top-2 -right-2 z-10">
+              <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500 text-white shadow-lg">Default</span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div id="card-2" class="relative group">
+            <div id="card-face-2" class="relative bg-gradient-to-br from-emerald-700 to-gray-900 rounded-2xl p-6 text-white shadow-lg border border-emerald-400/10 transition-all duration-300">
+              <div id="frozen-overlay-2" class="hidden absolute inset-0 rounded-2xl bg-black/50 backdrop-grayscale z-10 flex items-center justify-center">
+                <span class="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-red-500/80 text-white rounded-full">Frozen</span>
+              </div>
+              <div class="flex items-center justify-between mb-8 relative z-[5]">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-6 rounded bg-yellow-300/30 flex items-center justify-center text-[10px] font-bold text-yellow-200">IC</div>
+                  <span class="text-[10px] font-semibold uppercase tracking-widest opacity-60">Debit</span>
+                  <span id="frozen-badge-2" class="hidden text-[10px] font-semibold text-red-400 bg-red-500/20 px-1.5 py-0.5 rounded">Frozen</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <div class="relative">
+                    <button onclick="toggleCardMenu(2)" class="text-white/40 hover:text-white transition-colors p-1" title="Card actions">
+                      <i data-lucide="more-vertical" class="w-4 h-4"></i>
+                    </button>
+                    <div id="card-menu-2" class="hidden absolute right-0 top-8 w-52 bg-[#2b3139] border border-gray-700 rounded-xl shadow-xl z-30 py-1">
+                      <button onclick="setDefaultCard(2)" class="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="star" class="w-4 h-4 text-gray-500 shrink-0"></i> Set as default
+                      </button>
+                      <button onclick="toggleFreeze(2)" id="freeze-btn-2" class="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="snowflake" class="w-4 h-4 text-blue-400 shrink-0"></i> Freeze card
+                      </button>
+                      <button onclick="toggleFunding(2)" id="funding-btn-2" class="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="repeat" class="w-4 h-4 text-emerald-400 shrink-0"></i> <span id="funding-text-2">Mark as funding source</span>
+                      </button>
+                      <button onclick="openCurrencyModal(2)" class="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="globe" class="w-4 h-4 text-sky-400 shrink-0"></i> Change currency
+                      </button>
+                      <button onclick="openLimitModal(2)" class="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="sliders" class="w-4 h-4 text-purple-400 shrink-0"></i> Spend limit
+                      </button>
+                      <hr class="border-gray-700 my-1">
+                      <button onclick="removeCard(2)" class="w-full text-left px-4 py-2.5 text-sm text-red-400 hover:bg-gray-700/50 flex items-center gap-2.5">
+                        <i data-lucide="trash-2" class="w-4 h-4 text-red-400 shrink-0"></i> Remove card
+                      </button>
+                    </div>
+                  </div>
+                  <span class="text-lg font-bold tracking-wider text-yellow-400" style="font-family: serif;">MC</span>
+                </div>
+              </div>
+              <p class="text-lg font-mono tracking-widest mb-5 relative z-[5]">•••• &nbsp;•••• &nbsp;•••• &nbsp;8910</p>
+              <div class="flex items-center justify-between text-sm mb-4 relative z-[5]">
+                <div>
+                  <p class="text-[10px] opacity-60 uppercase tracking-wider">Cardholder</p>
+                  <p class="font-medium tracking-wide">User</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-[10px] opacity-60 uppercase tracking-wider">Expires</p>
+                  <p class="font-medium">11/27</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 pt-3 border-t border-white/10 relative z-[5]">
+                <span id="funding-badge-2" class="hidden text-[10px] font-semibold text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded">Funding</span>
+                <span id="currency-badge-2" class="text-[10px] font-semibold text-gray-400 bg-white/5 px-2 py-0.5 rounded">EUR</span>
+                <span id="limit-badge-2" class="text-[10px] text-gray-500">No limit</span>
+              </div>
+            </div>
+            <div id="default-badge-2" class="absolute -top-2 -right-2 z-10 hidden">
+              <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500 text-white shadow-lg">Default</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="cards-empty" class="hidden bg-[#1e2329] rounded-2xl border border-gray-800 p-12 flex flex-col items-center justify-center text-center">
           <div class="w-14 h-14 rounded-full bg-[#2b3139] flex items-center justify-center text-gray-500 mb-4">
             <i data-lucide="credit-card" class="w-7 h-7"></i>
           </div>
@@ -341,6 +484,39 @@
         </div>
         <button type="submit" class="w-full px-6 py-3.5 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-500 rounded-xl transition-all">
           Confirm Transfer
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Card Modal -->
+  <div id="add-card-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center">
+    <div class="bg-[#1e2329] rounded-3xl border border-gray-800 w-full max-w-md mx-4 p-6 sm:p-8 relative">
+      <button id="add-card-modal-close" type="button" class="absolute top-4 right-4 text-gray-500 hover:text-gray-300 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <h2 class="text-xl font-bold text-white">Link a Card</h2>
+      <form id="add-card-form" class="mt-6 space-y-5">
+        <div>
+          <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">Card Number</label>
+          <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" class="mt-2 w-full px-4 py-3 text-sm bg-[#2b3139] border border-gray-700 text-white placeholder-gray-500 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+        </div>
+        <div>
+          <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">Cardholder Name</label>
+          <input type="text" id="card-name" placeholder="John Doe" class="mt-2 w-full px-4 py-3 text-sm bg-[#2b3139] border border-gray-700 text-white placeholder-gray-500 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">Expiry</label>
+            <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" class="mt-2 w-full px-4 py-3 text-sm bg-[#2b3139] border border-gray-700 text-white placeholder-gray-500 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+          </div>
+          <div>
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-widest">CVV</label>
+            <input type="text" id="card-cvv" placeholder="123" maxlength="4" class="mt-2 w-full px-4 py-3 text-sm bg-[#2b3139] border border-gray-700 text-white placeholder-gray-500 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
+          </div>
+        </div>
+        <button type="submit" class="w-full px-6 py-3.5 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-500 rounded-xl transition-all">
+          Add Card
         </button>
       </form>
     </div>
@@ -422,6 +598,119 @@
         grid: { borderColor: '#2b3139', strokeDashArray: 3 }
       };
       new ApexCharts(chartEl, options).render();
+    }
+
+    // ---- Card Management ----
+    var CARD_COUNTER = 2;
+
+    function openAddCardModal() {
+      document.getElementById('add-card-modal').classList.remove('hidden');
+    }
+
+    function closeAddCardModal() {
+      document.getElementById('add-card-modal').classList.add('hidden');
+    }
+
+    document.getElementById('add-card-modal-close').addEventListener('click', closeAddCardModal);
+    document.getElementById('add-card-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeAddCardModal();
+    });
+
+    document.getElementById('card-number').addEventListener('input', function () {
+      var val = this.value.replace(/\D/g, '').slice(0, 16);
+      var formatted = '';
+      for (var i = 0; i < val.length; i++) {
+        if (i > 0 && i % 4 === 0) formatted += ' ';
+        formatted += val[i];
+      }
+      this.value = formatted;
+    });
+
+    document.getElementById('card-expiry').addEventListener('input', function () {
+      var val = this.value.replace(/\D/g, '').slice(0, 4);
+      if (val.length > 2) val = val.slice(0, 2) + '/' + val.slice(2);
+      this.value = val;
+    });
+
+    document.getElementById('add-card-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var number = document.getElementById('card-number').value.replace(/\s/g, '');
+      var name = document.getElementById('card-name').value.trim();
+      var expiry = document.getElementById('card-expiry').value.trim();
+      if (number.length < 13 || !name || expiry.length < 4) return;
+
+      var last4 = number.slice(-4);
+      var isVisa = number[0] === '4';
+      CARD_COUNTER++;
+      var id = CARD_COUNTER;
+
+      var gradient = isVisa
+        ? 'from-blue-700 to-indigo-950'
+        : 'from-rose-700 to-gray-900';
+      var brand = isVisa ? 'VISA' : 'MC';
+      var brandStyle = isVisa ? 'serif' : 'serif';
+      var brandColor = isVisa ? '' : 'text-yellow-400';
+
+      var html =
+        '<div id="card-' + id + '" class="relative group">' +
+          '<div class="bg-gradient-to-br ' + gradient + ' rounded-2xl p-6 text-white shadow-lg border border-white/10">' +
+            '<div class="flex items-center justify-between mb-8">' +
+              '<div class="flex items-center gap-2">' +
+                '<div class="w-8 h-6 rounded bg-yellow-300/30 flex items-center justify-center text-[10px] font-bold text-yellow-200">IC</div>' +
+                '<span class="text-[10px] font-semibold uppercase tracking-widest opacity-60">Debit</span>' +
+              '</div>' +
+              '<span class="text-lg font-bold tracking-wider ' + brandColor + '" style="font-family: ' + brandStyle + ';">' + brand + '</span>' +
+            '</div>' +
+            '<p class="text-lg font-mono tracking-widest mb-5">•••• &nbsp;•••• &nbsp;•••• &nbsp;' + last4 + '</p>' +
+            '<div class="flex items-center justify-between text-sm">' +
+              '<div>' +
+                '<p class="text-[10px] opacity-60 uppercase tracking-wider">Cardholder</p>' +
+                '<p class="font-medium tracking-wide">' + name + '</p>' +
+              '</div>' +
+              '<div class="text-right">' +
+                '<p class="text-[10px] opacity-60 uppercase tracking-wider">Expires</p>' +
+                '<p class="font-medium">' + expiry + '</p>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div id="default-badge-' + id + '" class="absolute -top-2 -right-2 hidden">' +
+            '<span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500 text-white shadow-lg">Default</span>' +
+          '</div>' +
+          '<div class="absolute top-3 right-3 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">' +
+            '<button onclick="setDefaultCard(' + id + ')" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors" title="Set as default">' +
+              '<i data-lucide="star" class="w-3.5 h-3.5"></i>' +
+            '</button>' +
+            '<button onclick="removeCard(' + id + ')" class="p-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/40 transition-colors" title="Remove card">' +
+              '<i data-lucide="trash-2" class="w-3.5 h-3.5"></i>' +
+            '</button>' +
+          '</div>' +
+        '</div>';
+
+      var list = document.getElementById('cards-list');
+      list.insertAdjacentHTML('beforeend', html);
+      document.getElementById('cards-empty').classList.add('hidden');
+
+      if (typeof lucide !== 'undefined' && lucide.createIcons) lucide.createIcons();
+      closeAddCardModal();
+      document.getElementById('add-card-form').reset();
+    });
+
+    function removeCard(id) {
+      var el = document.getElementById('card-' + id);
+      if (!el) return;
+      el.remove();
+      var remaining = document.querySelectorAll('#cards-list > div');
+      if (remaining.length === 0) {
+        document.getElementById('cards-empty').classList.remove('hidden');
+      }
+    }
+
+    function setDefaultCard(id) {
+      document.querySelectorAll('[id^="default-badge-"]').forEach(function (badge) {
+        badge.classList.add('hidden');
+      });
+      var badge = document.getElementById('default-badge-' + id);
+      if (badge) badge.classList.remove('hidden');
     }
   </script>
   <script src="assets/js/app.js"></script>

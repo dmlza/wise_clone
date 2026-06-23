@@ -248,6 +248,59 @@ if (modal && sendBtn && closeBtn && form) {
       window.location.href = 'dashboard.html';
     });
   }
+
+  var toSignup = document.getElementById('signin-to-signup');
+  if (toSignup) {
+    toSignup.addEventListener('click', function () {
+      closeModal();
+      var signupModal = document.getElementById('signup-modal');
+      if (signupModal) signupModal.classList.remove('hidden');
+    });
+  }
+})();
+
+// ---- Sign Up Modal ----
+(function () {
+  var navLink = document.getElementById('getstarted-link');
+  var cardLink = document.getElementById('getstarted-card');
+  var modal = document.getElementById('signup-modal');
+  var close = document.getElementById('signup-modal-close');
+  var form = document.getElementById('signup-form');
+  var toSignin = document.getElementById('signup-to-signin');
+
+  function openModal(e) {
+    e.preventDefault();
+    if (modal) modal.classList.remove('hidden');
+  }
+
+  function closeModal() {
+    if (modal) modal.classList.add('hidden');
+  }
+
+  if (navLink) navLink.addEventListener('click', openModal);
+  if (cardLink) cardLink.addEventListener('click', openModal);
+  if (close) close.addEventListener('click', closeModal);
+
+  if (modal) {
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      window.location.href = 'dashboard.html';
+    });
+  }
+
+  if (toSignin) {
+    toSignin.addEventListener('click', function () {
+      closeModal();
+      var signinModal = document.getElementById('signin-modal');
+      if (signinModal) signinModal.classList.remove('hidden');
+    });
+  }
 })();
 
 // ---- Chat Widget ----
