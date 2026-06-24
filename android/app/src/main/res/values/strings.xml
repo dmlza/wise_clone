@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Wisecracker</string>
+    <string name="title_activity_main">Wisecracker</string>
+    <string name="package_name">com.wisecracker.app</string>
+    <string name="custom_url_scheme">com.wisecracker.app</string>
+</resources>
