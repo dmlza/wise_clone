@@ -197,12 +197,12 @@ if (modal && sendBtn && closeBtn && form) {
     var timestamp = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ', ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 
     var row = document.createElement('tr');
-    row.className = 'hover:bg-gray-50 transition-colors';
+    row.className = 'hover:bg-gray-800/50 transition-colors';
     row.innerHTML =
-      '<td class="px-5 py-4"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center text-red-500 shrink-0"><i data-lucide="arrow-up-right" class="w-4 h-4"></i></div><div><p class="font-medium text-gray-900">Sent Bitcoin</p><p class="text-xs text-gray-400 mt-0.5">To: ' + short + '</p></div></div></td>' +
-      '<td class="px-5 py-4 font-medium text-red-500">-' + btcAmount + ' BTC</td>' +
+      '<td class="px-5 py-4"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-red-500/10 flex items-center justify-center text-red-400 shrink-0"><i data-lucide="arrow-up-right" class="w-4 h-4"></i></div><div><p class="font-medium text-gray-100">Sent Bitcoin</p><p class="text-xs text-gray-400 mt-0.5">To: ' + short + '</p></div></div></td>' +
+      '<td class="px-5 py-4 font-medium text-red-400">-' + btcAmount + ' BTC</td>' +
       '<td class="px-5 py-4 text-gray-400">' + timestamp + '</td>' +
-      '<td class="px-5 py-4"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Completed</span></td>';
+      '<td class="px-5 py-4"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>Completed</span></td>';
 
     tableBody.insertBefore(row, tableBody.firstChild);
 
